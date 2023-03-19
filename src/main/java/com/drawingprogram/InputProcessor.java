@@ -4,24 +4,19 @@ import com.drawingprogram.commands.*;
 import com.drawingprogram.factory.CommandFactory;
 import com.drawingprogram.models.Canvas;
 import com.drawingprogram.models.RectCanvas;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class InputProcessor {
-  private final CommandFactory commandFactory;
   private static Canvas canvas;
 
-  public InputProcessor(CommandFactory commandFactory) {
-    this.commandFactory = commandFactory;
-  }
-
   public void process(String inputString) {
+    final CommandFactory commandFactory = new CommandFactory();
+
     Command command = null;
 
     try {
       command = commandFactory.getCommand(inputString);
     } catch (RuntimeException e) {
-      log.error(e.getMessage());
+      System.out.println(e.getMessage());
     }
 
     execute(command);

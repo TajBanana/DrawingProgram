@@ -1,13 +1,12 @@
 package com.drawingprogram;
 
-import com.drawingprogram.factory.CommandFactory;
 import com.drawingprogram.utils.InputScanner;
 import com.drawingprogram.utils.Menu;
 
 public class Main {
 
   public static void main(String[] args) {
-    InputProcessor inputProcessor = new InputProcessor(new CommandFactory());
+    InputProcessor inputProcessor = new InputProcessor();
     InputScanner inputScanner = new InputScanner();
 
     Menu.print();
