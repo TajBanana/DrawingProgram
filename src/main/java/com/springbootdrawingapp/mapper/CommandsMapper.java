@@ -1,7 +1,9 @@
 package com.springbootdrawingapp.mapper;
 
 import com.springbootdrawingapp.enums.Commands;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommandsMapper {
   public Commands stringToCommands(String commandString) {
     return switch (commandString.toUpperCase()) {

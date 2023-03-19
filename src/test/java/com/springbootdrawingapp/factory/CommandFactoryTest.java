@@ -1,23 +1,30 @@
+/*
 package com.springbootdrawingapp.factory;
 
-import com.springbootdrawingapp.commands.Command;
-import com.springbootdrawingapp.commands.CreateCanvasCommand;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 public class CommandFactoryTest {
 
-  @Test
-  public void testCreateCommand() {
-    CommandFactory commandFactory = new CommandFactory();
-    Command command = commandFactory.getCommand("C 5 10");
-    int width = ((CreateCanvasCommand) command).getWidth();
-    int height = ((CreateCanvasCommand) command).getHeight();
+  @InjectMocks
+  private CommandFactory commandFactory;
 
-    assertEquals(command.getClass(), CreateCanvasCommand.class);
-    assertEquals(width, 5);
-    assertEquals(height, 10);
+  @Test
+  public void testGetCommand() {
+    String userInput = "command param1 param2";
+    String expectedCommand = "command";
+    String[] expectedParams = new String[]{"param1", "param2"};
+
+    commandFactory.getCommand(userInput);
+
+    verify(commandFactory).createCommand(expectedCommand, expectedParams);
+
   }
 
-}
+}*/

@@ -2,7 +2,9 @@ package com.springbootdrawingapp.utils.validator;
 
 import com.springbootdrawingapp.enums.Commands;
 import com.springbootdrawingapp.exceptions.InvalidCommandException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommandValidator {
   public void validate(String commandString) {
     if (!commandExists(commandString)) {
