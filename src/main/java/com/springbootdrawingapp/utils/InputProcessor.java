@@ -1,5 +1,6 @@
 package com.springbootdrawingapp.utils;
 
+import com.drawingprogram.exceptions.EmptyCanvasException;
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.factory.CommandFactory;
 import com.springbootdrawingapp.models.Canvas;
@@ -16,28 +17,29 @@ public class InputProcessor {
   }
 
   public void process(String inputString) {
-    Command command = null;
+    Command command;
 
     try {
       command = commandFactory.getCommand(inputString);
+      execute(command);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
     }
-
-    execute(command);
   }
 
   public void execute(Command command) {
-    if (command instanceof DrawCanvasCommand) {
-      int width = ((DrawCanvasCommand) command).getWidth();
-      int height = ((DrawCanvasCommand) command).getHeight();
+
+    if (command instanceof CreateCanvasCommand) {
+      int width = ((CreateCanvasCommand) command).getWidth();
+      int height = ((CreateCanvasCommand) command).getHeight();
 
       canvas = new RectCanvas(width, height);
-      canvas.render();
     }
+
+    if (canvas == null) throw new EmptyCanvasException();
+
     if (command instanceof DrawLineCommand) {
-      System.out.println(command);
-      canvas.render();
+      canvas.addEntity((DrawLineCommand) command);
     }
     if (command instanceof DrawRectangleCommand) {
       canvas.render();

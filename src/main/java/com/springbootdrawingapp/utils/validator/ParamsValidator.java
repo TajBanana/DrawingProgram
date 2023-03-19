@@ -5,12 +5,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ParamsValidator {
+
+  private final CreateCanvasParamsValidator createCanvasParamsValidator;
+  private final DrawLineParamsValidator drawLineParamsValidator;
+
+  public ParamsValidator(CreateCanvasParamsValidator createCanvasParamsValidator, DrawLineParamsValidator drawLineParamsValidator) {
+    this.createCanvasParamsValidator = createCanvasParamsValidator;
+    this.drawLineParamsValidator = drawLineParamsValidator;
+  }
+
   public void validate(String command, String[] params) {
       if (command.equalsIgnoreCase(Commands.CREATE_CANVAS.inputString())) {
-        CreateCanvasParamsValidator.validate(params);
+        createCanvasParamsValidator.validate(params);
       }
       if (command.equalsIgnoreCase(Commands.NEW_LINE.inputString())) {
-        DrawLineParamsValidator.validate(params);
+        drawLineParamsValidator.validate(params);
       }
       if (command.equalsIgnoreCase(Commands.NEW_RECTANGLE.inputString())) {
       }

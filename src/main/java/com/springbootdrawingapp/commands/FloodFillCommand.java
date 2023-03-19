@@ -1,4 +1,4 @@
 package com.springbootdrawingapp.commands;
 
-public class FloodFillCommand implements Command{
+public class FloodFillCommand implements DrawCommand{
 }

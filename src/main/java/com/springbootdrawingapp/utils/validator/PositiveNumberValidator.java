@@ -2,9 +2,11 @@ package com.springbootdrawingapp.utils.validator;
 
 import com.springbootdrawingapp.exceptions.InvalidNumberException;
 import com.springbootdrawingapp.exceptions.NonIntegerException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PositiveNumberValidator {
-  public static void validate(String numString) {
+  public void validate(String numString) {
     try {
       int num = Integer.parseInt(numString);
 

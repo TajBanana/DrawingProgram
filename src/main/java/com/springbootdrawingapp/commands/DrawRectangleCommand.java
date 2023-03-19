@@ -1,4 +1,4 @@
 package com.springbootdrawingapp.commands;
 
-public class DrawRectangleCommand implements Command{
+public class DrawRectangleCommand implements DrawCommand{
 }

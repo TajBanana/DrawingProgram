@@ -13,6 +13,10 @@ public enum CanvasChar {
     this.character = character;
   }
 
+  public char toChar() {
+    return character;
+  }
+
   @Override
   public String toString() {
     return String.valueOf(character);

@@ -40,7 +40,7 @@ public class CommandFactory {
     paramsValidator.validate(commandString, params);
 
     return switch (command) {
-      case CREATE_CANVAS -> new DrawCanvasCommand(params);
+      case CREATE_CANVAS -> new CreateCanvasCommand(params);
       case NEW_LINE -> new DrawLineCommand(params);
       case NEW_RECTANGLE -> new DrawRectangleCommand();
       case FILL_AREA -> new FloodFillCommand();

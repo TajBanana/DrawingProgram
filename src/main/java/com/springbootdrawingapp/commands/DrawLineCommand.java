@@ -1,6 +1,9 @@
 package com.springbootdrawingapp.commands;
 
-public class DrawLineCommand implements Command {
+import lombok.Getter;
+
+@Getter
+public class DrawLineCommand implements DrawCommand {
   private final int x1;
   private final int y1;
   private final int x2;
@@ -8,10 +11,10 @@ public class DrawLineCommand implements Command {
 
 
   public DrawLineCommand(String[] params) {
-    this.x1 = Integer.parseInt(params[0]);
-    this.y1 = Integer.parseInt(params[1]);
-    this.x2 = Integer.parseInt(params[2]);
-    this.y2 = Integer.parseInt(params[3]);
+    this.x1 = Math.min(Integer.parseInt(params[0]),Integer.parseInt(params[2]));
+    this.y1 = Math.min(Integer.parseInt(params[1]),Integer.parseInt(params[3]));
+    this.x2 = Math.max(Integer.parseInt(params[0]),Integer.parseInt(params[2]));
+    this.y2 = Math.max(Integer.parseInt(params[1]),Integer.parseInt(params[3]));
   }
 
   @Override
