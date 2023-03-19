@@ -22,6 +22,7 @@ public class InputProcessor {
     try {
       command = commandFactory.getCommand(inputString);
       execute(command);
+
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
     }
