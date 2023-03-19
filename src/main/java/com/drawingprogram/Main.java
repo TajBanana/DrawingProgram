@@ -1,13 +1,15 @@
 package com.drawingprogram;
 
+import com.drawingprogram.factory.CommandFactory;
 import com.drawingprogram.utils.InputScanner;
 import com.drawingprogram.utils.Menu;
 
 public class Main {
-  private final static InputProcessor inputProcessor = new InputProcessor();
-  private final static InputScanner inputScanner = new InputScanner();
 
   public static void main(String[] args) {
+    InputProcessor inputProcessor = new InputProcessor(new CommandFactory());
+    InputScanner inputScanner = new InputScanner();
+
     Menu.print();
     System.out.print("Enter command:");
 

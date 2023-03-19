@@ -1,6 +1,5 @@
 package com.drawingprogram.commands;
 
-import com.drawingprogram.enums.MenuOptions;
 import lombok.Getter;
 
 @Getter

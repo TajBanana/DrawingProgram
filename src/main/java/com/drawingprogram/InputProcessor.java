@@ -8,8 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class InputProcessor {
-  private final CommandFactory commandFactory = new CommandFactory();
+  private final CommandFactory commandFactory;
   private static Canvas canvas;
+
+  public InputProcessor(CommandFactory commandFactory) {
+    this.commandFactory = commandFactory;
+  }
 
   public void process(String inputString) {
     Command command = null;

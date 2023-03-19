@@ -8,8 +8,7 @@ import com.drawingprogram.utils.validator.ParamsValidator;
 public class CommandMapper {
   private final CommandValidator commandValidator = new CommandValidator();
   private final ParamsValidator paramsValidator = new ParamsValidator();
-  private final CommandsMapper commandsMapper =
-      new CommandsMapper();
+  private final CommandsMapper commandsMapper = new CommandsMapper();
 
   public Command createCommand(String commandString, String[] params) {
     Commands command = commandsMapper.stringToCommands(commandString);
