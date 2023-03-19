@@ -1,9 +1,9 @@
 package com.drawingprogram.exceptions;
 
-import com.drawingprogram.enums.ParamsError;
+import com.drawingprogram.enums.NumberError;
 
 public class InvalidNumberException extends RuntimeException{
   public InvalidNumberException() {
-    super(ParamsError.INVALID_NUMBER.toString());
+    super(NumberError.INVALID_NUMBER.toString());
   }
 }

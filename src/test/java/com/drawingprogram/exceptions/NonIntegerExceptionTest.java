@@ -1,6 +1,6 @@
 package com.drawingprogram.exceptions;
 
-import com.drawingprogram.enums.ParamsError;
+import com.drawingprogram.enums.NumberError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +14,7 @@ class NonIntegerExceptionTest {
               throw new NonIntegerException();
             });
 
-    assertEquals(ParamsError.NON_INTEGER.toString(),
+    assertEquals(NumberError.NON_INTEGER.toString(),
         exception.getMessage());
   }
 

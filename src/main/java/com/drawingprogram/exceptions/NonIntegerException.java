@@ -1,9 +1,9 @@
 package com.drawingprogram.exceptions;
 
-import com.drawingprogram.enums.ParamsError;
+import com.drawingprogram.enums.NumberError;
 
 public class NonIntegerException extends RuntimeException{
   public NonIntegerException() {
-    super(ParamsError.NON_INTEGER.toString());
+    super(NumberError.NON_INTEGER.toString());
   }
 }

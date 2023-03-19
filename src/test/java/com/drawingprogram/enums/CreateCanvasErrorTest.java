@@ -12,7 +12,7 @@ class CreateCanvasErrorTest {
 
         \u001B[31mCreate command expects 2 params\u001B[0m
         """;
-    String actualErrorMessage = CreateCanvasError.INVALID_PARAMS.toString();
+    String actualErrorMessage = ParamsLengthError.CREATE_COMMAND.toString();
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
 }

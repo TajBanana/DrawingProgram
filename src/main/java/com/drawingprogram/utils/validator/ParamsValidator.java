@@ -9,6 +9,7 @@ public class ParamsValidator {
         CreateCanvasParamsValidator.validate(params);
       }
       if (command.equalsIgnoreCase(Commands.NEW_LINE.inputString())) {
+        DrawLineParamsValidator.validate(params);
       }
       if (command.equalsIgnoreCase(Commands.NEW_RECTANGLE.inputString())) {
       }

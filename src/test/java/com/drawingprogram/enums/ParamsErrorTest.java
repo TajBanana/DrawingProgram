@@ -12,7 +12,7 @@ public class ParamsErrorTest {
 
       \u001B[31mInput must be more than 0\u001B[0m
       """;
-    String actualErrorMessage = ParamsError.INVALID_NUMBER.toString();
+    String actualErrorMessage = NumberError.INVALID_NUMBER.toString();
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
 
@@ -22,7 +22,7 @@ public class ParamsErrorTest {
 
       \u001B[31mInput must be an integer\u001B[0m
       """;
-    String actualErrorMessage = ParamsError.NON_INTEGER.toString();
+    String actualErrorMessage = NumberError.NON_INTEGER.toString();
     assertEquals(expectedErrorMessage, actualErrorMessage);
   }
 

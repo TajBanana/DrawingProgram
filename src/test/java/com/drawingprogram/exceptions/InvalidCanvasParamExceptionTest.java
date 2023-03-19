@@ -1,6 +1,6 @@
 package com.drawingprogram.exceptions;
 
-import com.drawingprogram.enums.CreateCanvasError;
+import com.drawingprogram.enums.ParamsLengthError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,11 +12,11 @@ class InvalidCanvasParamExceptionTest {
     InvalidCanvasParamException exception = assertThrows(
         InvalidCanvasParamException.class,
         () -> {
-          throw new InvalidCanvasParamException();
+          throw new InvalidCanvasParamException(ParamsLengthError.CREATE_COMMAND.toString());
         }
     );
 
-    assertEquals(CreateCanvasError.INVALID_PARAMS.toString(),
+    assertEquals(ParamsLengthError.CREATE_COMMAND.toString(),
         exception.getMessage());
   }
 }

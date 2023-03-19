@@ -31,6 +31,7 @@ public class InputProcessor {
       canvas.render();
     }
     if (command instanceof DrawLineCommand) {
+      System.out.println(command);
     }
     if (command instanceof DrawRectangleCommand) {
     }

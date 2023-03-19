@@ -1,9 +1,9 @@
 package com.drawingprogram.exceptions;
 
-import com.drawingprogram.enums.CreateCanvasError;
+import com.drawingprogram.enums.ParamsLengthError;
 
 public class InvalidCanvasParamException extends RuntimeException {
-  public InvalidCanvasParamException() {
-    super(CreateCanvasError.INVALID_PARAMS.toString());
+  public InvalidCanvasParamException(String error) {
+    super(error);
   }
 }

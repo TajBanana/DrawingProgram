@@ -3,7 +3,7 @@ package com.drawingprogram.utils.validator;
 import com.drawingprogram.exceptions.InvalidNumberException;
 import com.drawingprogram.exceptions.NonIntegerException;
 
-public class PositiveParamValidator {
+public class PositiveNumberValidator {
   public static void validate(String numString) {
     try {
       int num = Integer.parseInt(numString);

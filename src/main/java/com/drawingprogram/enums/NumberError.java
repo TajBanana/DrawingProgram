@@ -1,6 +1,6 @@
 package com.drawingprogram.enums;
 
-public enum ParamsError {
+public enum NumberError {
   INVALID_NUMBER("""
 
       \u001B[31mInput must be more than 0\u001B[0m
@@ -11,7 +11,7 @@ public enum ParamsError {
       """);
   private final String errorMessage;
 
-  ParamsError(String errorMessage) {
+  NumberError(String errorMessage) {
     this.errorMessage = errorMessage;
   }
 
