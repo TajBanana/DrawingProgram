@@ -3,7 +3,9 @@ package com.springbootdrawingapp.utils.drawing;
 import com.springbootdrawingapp.commands.DrawBucketFillCommand;
 import com.springbootdrawingapp.enums.CommandError;
 import com.springbootdrawingapp.exceptions.OutOfBoundsException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BucketFillUtil {
 
   public void fill(DrawBucketFillCommand command, char[][] canvasArray) {

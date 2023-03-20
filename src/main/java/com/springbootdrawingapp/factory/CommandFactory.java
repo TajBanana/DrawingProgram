@@ -36,7 +36,7 @@ public class CommandFactory {
     return createCommand(commandString, params);
   }
 
-  public Command createCommand(String commandString, String[] params) {
+  private Command createCommand(String commandString, String[] params) {
 
     commandValidator.validate(commandString);
     paramsValidator.validate(commandString, params);

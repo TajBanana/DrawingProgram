@@ -8,27 +8,42 @@ import com.springbootdrawingapp.factory.CanvasFactory;
 import com.springbootdrawingapp.utils.drawing.BucketFillUtil;
 import com.springbootdrawingapp.utils.drawing.LineUtil;
 import com.springbootdrawingapp.utils.drawing.RectangleUtil;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-public class CanvasRectangle implements Canvas{
+@Component
+@Setter
+@Getter
+public class CanvasRectangle implements Canvas {
 
-  private final char[][] canvasArray;
-  private final int width;
-  private final int height;
+  private final LineUtil lineUtil;
+  private final RectangleUtil rectangleUtil;
+  private final BucketFillUtil bucketFillUtil;
 
-  public CanvasRectangle(int w, int h) {
-    this.width = w;
-    this.height = h;
+  private char[][] canvasArray;
+  private int width;
+  private int height;
 
+  public CanvasRectangle(LineUtil lineUtil, RectangleUtil rectangleUtil, BucketFillUtil bucketFillUtil) {
+    this.lineUtil = lineUtil;
+    this.rectangleUtil = rectangleUtil;
+    this.bucketFillUtil = bucketFillUtil;
+  }
+
+  public void constructProperty() {
     canvasArray = new char[height][width];
     Arrays.stream(canvasArray).forEach(row -> Arrays.fill(row, ' '));
     render();
+
+    System.out.println(width);
+    System.out.println(height);
   }
 
   @Override
   public void addEntity(DrawCommand drawCommand) {
-    //System.out.println(drawCommand);
     addEntityHandler(drawCommand);
     render();
   }
@@ -39,15 +54,12 @@ public class CanvasRectangle implements Canvas{
 
   public void addEntityHandler(DrawCommand drawCommand) {
     if (drawCommand instanceof DrawLineCommand) {
-      LineUtil lineUtil = new LineUtil();
       lineUtil.draw((DrawLineCommand) drawCommand, canvasArray);
     }
     else if (drawCommand instanceof DrawRectangleCommand) {
-      RectangleUtil rectangleUtil = new RectangleUtil();
-      rectangleUtil.draw((DrawRectangleCommand) drawCommand,canvasArray);
+      rectangleUtil.draw((DrawRectangleCommand) drawCommand, canvasArray);
     }
     else if (drawCommand instanceof DrawBucketFillCommand) {
-      BucketFillUtil bucketFillUtil = new BucketFillUtil();
       bucketFillUtil.fill((DrawBucketFillCommand) drawCommand, canvasArray);
 
     }

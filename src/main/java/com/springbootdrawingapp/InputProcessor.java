@@ -3,17 +3,17 @@ package com.springbootdrawingapp;
 import com.springbootdrawingapp.exceptions.EmptyCanvasException;
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.factory.CommandFactory;
-import com.springbootdrawingapp.models.Canvas;
 import com.springbootdrawingapp.models.CanvasRectangle;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InputProcessor {
-  private static Canvas canvas;
   private final CommandFactory commandFactory;
+  private final CanvasRectangle canvasRectangle;
 
-  public InputProcessor(CommandFactory commandFactory) {
+  public InputProcessor(CommandFactory commandFactory, CanvasRectangle canvasRectangle) {
     this.commandFactory = commandFactory;
+    this.canvasRectangle = canvasRectangle;
   }
 
   public void process(String inputString) {
@@ -33,19 +33,21 @@ public class InputProcessor {
     if (command.getClass().equals(CreateCanvasCommand.class)) {
       int width = ((CreateCanvasCommand) command).getWidth();
       int height = ((CreateCanvasCommand) command).getHeight();
-      canvas = new CanvasRectangle(width, height);
+      canvasRectangle.setHeight(height);
+      canvasRectangle.setWidth(width);
+      canvasRectangle.constructProperty();
     }
-    else if (canvas == null) {
+    else if (canvasRectangle.getCanvasArray() == null) {
       throw new EmptyCanvasException();
     }
     else if (command.getClass().equals(DrawLineCommand.class)) {
-      canvas.addEntity((DrawLineCommand) command);
+      canvasRectangle.addEntity((DrawLineCommand) command);
     }
     else if (command.getClass().equals(DrawRectangleCommand.class)) {
-      canvas.addEntity((DrawRectangleCommand) command);
+      canvasRectangle.addEntity((DrawRectangleCommand) command);
     }
     else if (command.getClass().equals(DrawBucketFillCommand.class)) {
-      canvas.addEntity((DrawBucketFillCommand) command);
+      canvasRectangle.addEntity((DrawBucketFillCommand) command);
     }
   }
 }

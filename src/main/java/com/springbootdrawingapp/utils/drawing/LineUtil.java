@@ -4,7 +4,9 @@ import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import com.springbootdrawingapp.commands.DrawLineCommand;
 import com.springbootdrawingapp.enums.CanvasChar;
 import com.springbootdrawingapp.enums.CommandError;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LineUtil {
   public void draw(DrawLineCommand command, char[][] canvasArray) {
     if (command.getX1() > canvasArray[0].length || command.getY1() > canvasArray.length) {
