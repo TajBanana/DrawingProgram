@@ -1,13 +1,16 @@
 package com.springbootdrawingapp.commands;
 
 import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 @Getter
+@Service
 public class CreateCanvasCommand implements Command {
-  private final int height;
-  private final int width;
+  private int height;
+  private int width;
 
-  public CreateCanvasCommand(String[] params) {
+  @Override
+  public void setParams(String[] params) {
     this.width = Integer.parseInt(params[0]);
     this.height = Integer.parseInt(params[1]);
   }

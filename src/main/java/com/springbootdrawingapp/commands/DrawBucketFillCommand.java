@@ -1,14 +1,17 @@
 package com.springbootdrawingapp.commands;
 
 import lombok.Getter;
+import org.springframework.stereotype.Service;
 
 @Getter
-public class DrawBucketFillCommand implements DrawCommand{
-  private final int x1;
-  private final int y1;
-  private final char fillChar;
+@Service
+public class DrawBucketFillCommand implements DrawCommand {
+  private int x1;
+  private int y1;
+  private char fillChar;
 
-  public DrawBucketFillCommand(String[] params) {
+  @Override
+  public void setParams(String[] params) {
     this.x1 = Integer.parseInt(params[0]);
     this.y1 = Integer.parseInt(params[1]);
     this.fillChar = params[2].charAt(0);

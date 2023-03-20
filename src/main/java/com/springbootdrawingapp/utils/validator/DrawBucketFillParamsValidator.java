@@ -16,7 +16,7 @@ public class DrawBucketFillParamsValidator {
 
   public void validate(String[] params) {
     if (params.length != 3)
-      throw new InvalidLineParamsException(ParamsLengthError.LINE_COMMAND.toString());
+      throw new InvalidLineParamsException(ParamsLengthError.BUCKET_FILL_COMMAND.toString());
 
     positiveNumberValidator.validate(params[0]);
     positiveNumberValidator.validate(params[1]);
