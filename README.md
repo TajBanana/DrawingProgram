@@ -1,0 +1,34 @@
+# READ ME
+
+To run the program:
+1. Build the program by running  `mvn clean install` on your terminal
+2. Run the program by `mvn spring-boot:run`
+3. To check code for coverage run `mvn test` followed by `mvn jacoco:report`.
+   Look for the jacoco report file under `target/site/jacoco/index.html` 
+   directory.
+
+# Design
+The program is written using Spring for better dependency management and 
+better testability. As some Spring Beans require updates to their 
+properties during run time, the `private final Bean bean` constructor 
+injection has its limitations. Therefore, you will see that there will be 
+instances where I removed the dependency management from Spring and created 
+`new Objects()`.
+
+This reduces the testability and isn't recommended. However, this shall be 
+the implementation until I can come up with a better solution.
+
+### Dependencies
+The dependencies are listed from top to bottom 
+- SpringApp > Program > InputProcessor > Command > Canvas 
+
+There are a list of helper/util classes that include:
+1. validators
+2. factories
+3. mappers
+
+Exceptions that are handled:
+1. Empty Canvas
+2. Invalid command params
+3. Negative/Float numbers
+4. Out of bounds
