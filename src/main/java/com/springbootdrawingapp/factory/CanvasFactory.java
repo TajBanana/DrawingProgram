@@ -16,7 +16,7 @@ public class CanvasFactory {
       builder.append(CanvasChar.VERTICAL);
 
       for (int column = 0; column < width; column++) {
-        builder.append(canvasArray[column][row]);
+        builder.append(canvasArray[row][column]);
       }
       builder.append(CanvasChar.VERTICAL);
       builder.append("\n");

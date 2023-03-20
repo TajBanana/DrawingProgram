@@ -9,7 +9,7 @@ public class CommandsMapper {
     return switch (commandString.toUpperCase()) {
       case "C" -> Commands.CREATE_CANVAS;
       case "L" -> Commands.NEW_LINE;
-      case "F" -> Commands.FILL_AREA;
+      case "B" -> Commands.FILL_AREA;
       case "R" -> Commands.NEW_RECTANGLE;
       default -> Commands.QUIT;
     };

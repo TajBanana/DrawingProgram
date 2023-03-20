@@ -1,10 +1,10 @@
 package com.springbootdrawingapp.utils;
 
-import com.drawingprogram.exceptions.EmptyCanvasException;
+import com.springbootdrawingapp.exceptions.EmptyCanvasException;
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.factory.CommandFactory;
 import com.springbootdrawingapp.models.Canvas;
-import com.springbootdrawingapp.models.RectCanvas;
+import com.springbootdrawingapp.models.CanvasRectangle;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -30,23 +30,22 @@ public class InputProcessor {
 
   public void execute(Command command) {
 
-    if (command instanceof CreateCanvasCommand) {
+    if (command.getClass().equals(CreateCanvasCommand.class)) {
       int width = ((CreateCanvasCommand) command).getWidth();
       int height = ((CreateCanvasCommand) command).getHeight();
-
-      canvas = new RectCanvas(width, height);
+      canvas = new CanvasRectangle(width, height);
     }
-
-    if (canvas == null) throw new EmptyCanvasException();
-
-    if (command instanceof DrawLineCommand) {
+    else if (canvas == null) {
+      throw new EmptyCanvasException();
+    }
+    else if (command.getClass().equals(DrawLineCommand.class)) {
       canvas.addEntity((DrawLineCommand) command);
     }
-    if (command instanceof DrawRectangleCommand) {
-      canvas.render();
+    else if (command.getClass().equals(DrawRectangleCommand.class)) {
+      canvas.addEntity((DrawRectangleCommand) command);
     }
-    if (command instanceof FloodFillCommand) {
-      canvas.render();
+    else if (command.getClass().equals(DrawBucketFillCommand.class)) {
+      canvas.addEntity((DrawBucketFillCommand) command);
     }
   }
 }

@@ -1,6 +1,6 @@
 package com.springbootdrawingapp.models;
 
-import com.drawingprogram.exceptions.OutOfBoundsException;
+import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import com.springbootdrawingapp.commands.DrawCommand;
 
 public interface Canvas {

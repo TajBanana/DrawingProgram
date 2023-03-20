@@ -8,12 +8,14 @@ public class ParamsValidator {
 
   private final CreateCanvasParamsValidator createCanvasParamsValidator;
   private final DrawLineParamsValidator drawLineParamsValidator;
-  private final DrawRectangleValidator drawRectangleValidator;
+  private final DrawRectangleParamsValidator drawRectangleValidator;
+  private final DrawBucketFillParamsValidator drawBucketFillParamsValidator;
 
-  public ParamsValidator(CreateCanvasParamsValidator createCanvasParamsValidator, DrawLineParamsValidator drawLineParamsValidator, DrawRectangleValidator drawRectangleValidator) {
+  public ParamsValidator(CreateCanvasParamsValidator createCanvasParamsValidator, DrawLineParamsValidator drawLineParamsValidator, DrawRectangleParamsValidator drawRectangleValidator, DrawBucketFillParamsValidator drawBucketFillParamsValidator) {
     this.createCanvasParamsValidator = createCanvasParamsValidator;
     this.drawLineParamsValidator = drawLineParamsValidator;
     this.drawRectangleValidator = drawRectangleValidator;
+    this.drawBucketFillParamsValidator = drawBucketFillParamsValidator;
   }
 
   public void validate(String command, String[] params) {
@@ -27,6 +29,7 @@ public class ParamsValidator {
         drawRectangleValidator.validate(params);
       }
       if (command.equalsIgnoreCase(Commands.FILL_AREA.inputString())) {
+        drawBucketFillParamsValidator.validate(params);
       }
   }
 }

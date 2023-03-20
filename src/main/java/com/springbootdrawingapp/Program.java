@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Program {
-  InputProcessor inputProcessor;
-  InputScanner inputScanner;
+  final InputProcessor inputProcessor;
+  final InputScanner inputScanner;
 
   public Program(InputProcessor inputProcessor, InputScanner inputScanner) {
     this.inputProcessor = inputProcessor;

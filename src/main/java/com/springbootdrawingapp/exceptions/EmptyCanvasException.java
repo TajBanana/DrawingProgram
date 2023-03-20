@@ -1,4 +1,4 @@
-package com.drawingprogram.exceptions;
+package com.springbootdrawingapp.exceptions;
 
 import com.springbootdrawingapp.enums.CommandError;
 

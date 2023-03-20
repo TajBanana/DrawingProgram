@@ -42,8 +42,8 @@ public class CommandFactory {
     return switch (command) {
       case CREATE_CANVAS -> new CreateCanvasCommand(params);
       case NEW_LINE -> new DrawLineCommand(params);
-      case NEW_RECTANGLE -> new DrawRectangleCommand();
-      case FILL_AREA -> new FloodFillCommand();
+      case NEW_RECTANGLE -> new DrawRectangleCommand(params);
+      case FILL_AREA -> new DrawBucketFillCommand(params);
       case QUIT -> new QuitCommand();
     };
   }

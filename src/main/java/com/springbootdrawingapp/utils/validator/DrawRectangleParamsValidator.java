@@ -5,11 +5,11 @@ import com.springbootdrawingapp.exceptions.InvalidLineParamsException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DrawRectangleValidator {
+public class DrawRectangleParamsValidator {
 
   private final PositiveNumberValidator positiveNumberValidator;
 
-  public DrawRectangleValidator(PositiveNumberValidator positiveNumberValidator) {
+  public DrawRectangleParamsValidator(PositiveNumberValidator positiveNumberValidator) {
     this.positiveNumberValidator = positiveNumberValidator;
   }
 

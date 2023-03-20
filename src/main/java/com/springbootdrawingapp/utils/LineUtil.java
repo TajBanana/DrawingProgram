@@ -1,6 +1,6 @@
 package com.springbootdrawingapp.utils;
 
-import com.drawingprogram.exceptions.OutOfBoundsException;
+import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import com.springbootdrawingapp.commands.DrawLineCommand;
 import com.springbootdrawingapp.enums.CanvasChar;
 import com.springbootdrawingapp.enums.CommandError;
@@ -14,14 +14,14 @@ public class LineUtil {
         command.getY2(), canvasArray);
   }
 
-  private void drawLine(int x1, int y1, int x2, int y2, char[][] canvasArray) {
+  public void drawLine(int x1, int y1, int x2, int y2, char[][] canvasArray) {
 
     int height = Math.min(canvasArray.length, y2);
     int width = Math.min(canvasArray[0].length, x2);
 
-    for (int row = y1 - 1; row < y2 && row < height; row++) {
-      for (int col = x1 - 1; col < x2 && col < width; col++) {
-        canvasArray[col][row] = CanvasChar.LINE.toChar();
+    for (int row = y1 - 1; row <= height - 1; row++) {
+      for (int column = x1 - 1; column <= width - 1; column++) {
+        canvasArray[row][column] = CanvasChar.LINE.toChar();
       }
     }
   }

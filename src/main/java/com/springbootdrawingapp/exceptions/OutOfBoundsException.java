@@ -1,4 +1,4 @@
-package com.drawingprogram.exceptions;
+package com.springbootdrawingapp.exceptions;
 
 public class OutOfBoundsException extends RuntimeException {
   public OutOfBoundsException(String errorMessage) {

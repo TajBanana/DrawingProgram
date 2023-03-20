@@ -12,6 +12,10 @@ public enum CommandError {
   OUT_OF_BOUNDS("""
 
       \u001B[31mOut of bounds!\u001B[0m
+      """),
+  INVALID_FILL("""
+
+      \u001B[31mInvalid fill argument\u001B[0m
       """);
 
   private final String errorMessage;
