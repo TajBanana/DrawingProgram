@@ -5,9 +5,9 @@ import com.springbootdrawingapp.commands.DrawRectangleCommand;
 import com.springbootdrawingapp.commands.DrawCommand;
 import com.springbootdrawingapp.commands.DrawLineCommand;
 import com.springbootdrawingapp.factory.CanvasFactory;
-import com.springbootdrawingapp.utils.BucketFillUtil;
-import com.springbootdrawingapp.utils.LineUtil;
-import com.springbootdrawingapp.utils.RectangleUtil;
+import com.springbootdrawingapp.utils.drawing.BucketFillUtil;
+import com.springbootdrawingapp.utils.drawing.LineUtil;
+import com.springbootdrawingapp.utils.drawing.RectangleUtil;
 
 import java.util.Arrays;
 

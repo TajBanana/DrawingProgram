@@ -1,4 +1,4 @@
-package com.springbootdrawingapp.utils;
+package com.springbootdrawingapp.utils.drawing;
 
 import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import com.springbootdrawingapp.commands.DrawLineCommand;

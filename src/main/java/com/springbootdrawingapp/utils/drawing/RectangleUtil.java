@@ -1,4 +1,4 @@
-package com.springbootdrawingapp.utils;
+package com.springbootdrawingapp.utils.drawing;
 
 import com.springbootdrawingapp.commands.DrawRectangleCommand;
 import com.springbootdrawingapp.enums.CommandError;

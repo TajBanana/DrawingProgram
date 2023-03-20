@@ -1,4 +1,4 @@
-package com.springbootdrawingapp.utils;
+package com.springbootdrawingapp;
 
 import com.springbootdrawingapp.exceptions.EmptyCanvasException;
 import com.springbootdrawingapp.commands.*;
