@@ -14,14 +14,17 @@ public class CommandFactory {
   private final CommandValidator commandValidator;
   private final ParamsValidator paramsValidator;
   private final CommandsMapper commandsMapper;
+  private final CommandFactoryUtil commandFactoryUtil;
 
   public CommandFactory(
       CommandValidator commandValidator,
       ParamsValidator paramsValidator,
-      CommandsMapper commandsMapper) {
+      CommandsMapper commandsMapper,
+      CommandFactoryUtil commandFactoryUtil) {
     this.commandValidator = commandValidator;
     this.paramsValidator = paramsValidator;
     this.commandsMapper = commandsMapper;
+    this.commandFactoryUtil = commandFactoryUtil;
   }
 
   public Command getCommand(String userInput) {
@@ -34,17 +37,12 @@ public class CommandFactory {
   }
 
   public Command createCommand(String commandString, String[] params) {
-    Commands command = commandsMapper.stringToCommands(commandString);
 
     commandValidator.validate(commandString);
     paramsValidator.validate(commandString, params);
 
-    return switch (command) {
-      case CREATE_CANVAS -> new CreateCanvasCommand(params);
-      case NEW_LINE -> new DrawLineCommand(params);
-      case NEW_RECTANGLE -> new DrawRectangleCommand(params);
-      case FILL_AREA -> new DrawBucketFillCommand(params);
-      case QUIT -> new QuitCommand();
-    };
+    Commands command = commandsMapper.stringToCommands(commandString);
+
+    return commandFactoryUtil.resolve(command, params);
   }
 }

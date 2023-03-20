@@ -12,4 +12,12 @@ public class CanvasCharTest {
     assertEquals("x", CanvasChar.LINE.toString());
     assertEquals("o", CanvasChar.FILL.toString());
   }
+
+  @Test
+  void testToChar() {
+    assertEquals('-', CanvasChar.HORIZONTAL.toChar());
+    assertEquals('|', CanvasChar.VERTICAL.toChar());
+    assertEquals('x', CanvasChar.LINE.toChar());
+    assertEquals('o', CanvasChar.FILL.toChar());
+  }
 }

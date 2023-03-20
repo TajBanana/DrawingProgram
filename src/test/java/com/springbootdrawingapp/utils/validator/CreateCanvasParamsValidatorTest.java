@@ -12,7 +12,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class CreateCanvasParamsValidatorTest {
+public class CreateCanvasParamsValidatorTest {
 
   @Mock
   private PositiveNumberValidator positiveNumberValidator;
