@@ -8,6 +8,7 @@ import com.springbootdrawingapp.factory.CanvasFactory;
 import com.springbootdrawingapp.utils.drawing.BucketFillUtil;
 import com.springbootdrawingapp.utils.drawing.LineUtil;
 import com.springbootdrawingapp.utils.drawing.RectangleUtil;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,13 @@ import java.util.Arrays;
 @Getter
 public class CanvasRectangle implements Canvas {
 
+  @Getter(AccessLevel.NONE)
   private final LineUtil lineUtil;
+
+  @Getter(AccessLevel.NONE)
   private final RectangleUtil rectangleUtil;
+
+  @Getter(AccessLevel.NONE)
   private final BucketFillUtil bucketFillUtil;
 
   private char[][] canvasArray;

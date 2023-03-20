@@ -1,7 +1,8 @@
 package com.springbootdrawingapp;
 
-import com.springbootdrawingapp.utils.InputScanner;
-import com.springbootdrawingapp.utils.Menu;
+import com.springbootdrawingapp.utils.input.InputProcessor;
+import com.springbootdrawingapp.utils.input.InputScanner;
+import com.springbootdrawingapp.factory.Menu;
 import org.springframework.stereotype.Component;
 
 @Component

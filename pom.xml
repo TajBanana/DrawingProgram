@@ -107,6 +107,7 @@
                     <excludes>
                         <exclude>**/SpringBootDrawingAppApplication.**/**
                         </exclude>
+                        <exclude>**/Program.**/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -3,6 +3,7 @@ package com.springbootdrawingapp.utils;
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.exceptions.EmptyCanvasException;
 import com.springbootdrawingapp.models.CanvasRectangle;
+import com.springbootdrawingapp.utils.input.InputExecutor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class InputExecutorTest {
@@ -43,27 +43,33 @@ class InputExecutorTest {
 
   @Nested
   public class testsWithCanvas {
-    //problem here, how to make sure my canvas is not null?
-
-    CanvasRectangle canvasRectangle = mock(CanvasRectangle.class);
-
     @BeforeEach
     void setUp() {
-      CreateCanvasCommand createCanvasCommand =
-          new CreateCanvasCommand(new String[]{"20", "20"});
-      inputExecutor.execute(createCanvasCommand);
+      when(canvasRectangleMock.getCanvasArray()).thenReturn(new char[][]{{' '}, {' '}});
     }
 
     @Test
     void shouldCallAddEntityWithDrawLineCommand() {
-      CreateCanvasCommand createCanvasCommand =
-          new CreateCanvasCommand(new String[]{"20", "20"});
-      inputExecutor.execute(createCanvasCommand);
-
       DrawLineCommand drawLineCommand = mock(DrawLineCommand.class);
-      canvasRectangle.constructProperty();
       inputExecutor.execute(drawLineCommand);
-      verify(canvasRectangle).addEntity(drawLineCommand);
+
+      verify(canvasRectangleMock).addEntity(drawLineCommand);
+    }
+
+    @Test
+    void shouldCallAddEntityWithDrawRectangleCommand() {
+      DrawRectangleCommand drawRectangleCommand = mock(DrawRectangleCommand.class);
+      inputExecutor.execute(drawRectangleCommand);
+
+      verify(canvasRectangleMock).addEntity(drawRectangleCommand);
+    }
+
+    @Test
+    void shouldCallAddEntityWithDrawBucketFillCommand() {
+      DrawBucketFillCommand drawBucketFillCommand = mock(DrawBucketFillCommand.class);
+      inputExecutor.execute(drawBucketFillCommand);
+
+      verify(canvasRectangleMock).addEntity(drawBucketFillCommand);
     }
   }
 }

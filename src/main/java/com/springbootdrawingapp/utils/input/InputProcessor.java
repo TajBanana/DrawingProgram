@@ -1,8 +1,7 @@
-package com.springbootdrawingapp;
+package com.springbootdrawingapp.utils.input;
 
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.factory.CommandFactory;
-import com.springbootdrawingapp.utils.InputExecutor;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,4 +1,4 @@
-package com.springbootdrawingapp.utils;
+package com.springbootdrawingapp.utils.input;
 
 import org.springframework.stereotype.Component;
 

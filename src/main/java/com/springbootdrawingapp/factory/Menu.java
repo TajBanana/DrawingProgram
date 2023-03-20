@@ -1,4 +1,4 @@
-package com.springbootdrawingapp.utils;
+package com.springbootdrawingapp.factory;
 
 import com.springbootdrawingapp.enums.MenuOptions;
 

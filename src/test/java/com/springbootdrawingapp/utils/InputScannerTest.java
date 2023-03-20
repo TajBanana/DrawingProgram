@@ -1,5 +1,6 @@
 package com.springbootdrawingapp.utils;
 
+import com.springbootdrawingapp.utils.input.InputScanner;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

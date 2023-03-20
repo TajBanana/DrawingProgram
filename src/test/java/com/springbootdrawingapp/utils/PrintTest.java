@@ -1,6 +1,7 @@
 package com.springbootdrawingapp.utils;
 
 import com.springbootdrawingapp.enums.MenuOptions;
+import com.springbootdrawingapp.factory.Menu;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
