@@ -45,6 +45,6 @@ public class CommandFactoryTest {
     CreateCanvasCommand expectedCommand = new CreateCanvasCommand(new String[]{"1", "10"});
     when(commandFactoryUtil.resolve(Commands.CREATE_CANVAS, params)).thenReturn(expectedCommand);
     Command actualCommand = commandFactory.getCommand(userInput);
-    assertEquals(actualCommand,expectedCommand);
+    assertEquals(actualCommand, expectedCommand);
   }
 }

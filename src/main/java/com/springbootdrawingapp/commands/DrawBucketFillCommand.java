@@ -13,13 +13,4 @@ public class DrawBucketFillCommand implements DrawCommand{
     this.y1 = Integer.parseInt(params[1]);
     this.fillChar = params[2].charAt(0);
   }
-
-  @Override
-  public String toString() {
-    return "DrawBucketFillCommand{" +
-        "x1=" + x1 +
-        ", y1=" + y1 +
-        ", fillChar=" + fillChar +
-        '}';
-  }
 }

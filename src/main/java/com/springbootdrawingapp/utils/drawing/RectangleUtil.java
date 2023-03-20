@@ -23,10 +23,10 @@ public class RectangleUtil {
   }
 
   private void drawRectangle(int x1, int y1, int x2, int y2, char[][] canvasArray) {
-    lineUtil.drawLine(x1, y1, x2, y1,canvasArray);
-    lineUtil.drawLine(x1, y1, x1, y2,canvasArray);
-    lineUtil.drawLine(x2, y1, x2, y2,canvasArray);
-    lineUtil.drawLine(x1, y2, x2, y2,canvasArray);
+    lineUtil.drawLine(x1, y1, x2, y1, canvasArray);
+    lineUtil.drawLine(x1, y1, x1, y2, canvasArray);
+    lineUtil.drawLine(x2, y1, x2, y2, canvasArray);
+    lineUtil.drawLine(x1, y2, x2, y2, canvasArray);
 
   }
 }

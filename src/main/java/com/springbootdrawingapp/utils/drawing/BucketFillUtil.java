@@ -21,7 +21,7 @@ public class BucketFillUtil {
     int height = canvasArray.length;
     int row = canvasArray[0].length;
 
-    fillHelper(canvasArray,xIndex,yIndex,height,row,sourceChar,fillChar);
+    fillHelper(canvasArray, xIndex, yIndex, height, row, sourceChar, fillChar);
 
   }
 

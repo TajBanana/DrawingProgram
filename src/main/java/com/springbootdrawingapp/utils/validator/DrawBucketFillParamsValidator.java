@@ -21,6 +21,7 @@ public class DrawBucketFillParamsValidator {
     positiveNumberValidator.validate(params[0]);
     positiveNumberValidator.validate(params[1]);
 
-    if (params[2].length() != 1) throw new InvalidFillArgumentException(CommandError.INVALID_FILL.toString());
+    if (params[2].length() != 1)
+      throw new InvalidFillArgumentException(CommandError.INVALID_FILL.toString());
   }
 }
