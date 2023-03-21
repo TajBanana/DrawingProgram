@@ -68,23 +68,21 @@ class CanvasRectangleTest {
     void testAddLineEntity() {
       DrawLineCommand drawLineCommand = mock(DrawLineCommand.class);
       canvasRectangle.addEntity(drawLineCommand);
-      verify(lineUtil, times(1)).draw(drawLineCommand, canvasRectangle.getCanvasArray());
+      verify(lineUtil, times(1)).draw(canvasRectangle.getCanvasArray());
     }
 
     @Test
     void testAddRectangleEntity() {
       DrawRectangleCommand drawRectangleCommand = mock(DrawRectangleCommand.class);
       canvasRectangle.addEntity(drawRectangleCommand);
-      verify(rectangleUtil, times(1)).draw(drawRectangleCommand,
-          canvasRectangle.getCanvasArray());
+      verify(rectangleUtil, times(1)).draw(canvasRectangle.getCanvasArray());
     }
 
     @Test
     void testAddBucketFillEntity() {
       DrawBucketFillCommand drawRectangleCommand = mock(DrawBucketFillCommand.class);
       canvasRectangle.addEntity(drawRectangleCommand);
-      verify(bucketFillUtil, times(1)).draw(drawRectangleCommand,
-          canvasRectangle.getCanvasArray());
+      verify(bucketFillUtil, times(1)).draw(canvasRectangle.getCanvasArray());
     }
 
     @Test
@@ -115,28 +113,4 @@ class CanvasRectangleTest {
       assertEquals(expectedOutput, output);
     }
   }
-
-
-  //@Test
-  //void addEntityHandler_shouldCallDrawMethodFromLineUtil() {
-  //
-  //  DrawLineCommand drawLineCommand = new DrawLineCommand(1, 2, 6, 2);
-  //
-  //  canvasRectangle.addEntityHandler(drawLineCommand);
-  //
-  //  verify(lineUtil, times(1)).draw(drawLineCommand, canvasRectangle.getCanvasArray());
-  //  verifyNoMoreInteractions(rectangleUtil, bucketFillUtil);
-  //}
-  //
-  //@Test
-  //void addEntityHandler_shouldCallDrawMethodFromRectangleUtil() {
-  //  CanvasRectangle canvasRectangle = new CanvasRectangle(lineUtil, rectangleUtil,
-  //      bucketFillUtil, createCanvasCommand);
-  //  DrawRectangleCommand drawRectangleCommand = new DrawRectangleCommand(16, 1, 20, 3);
-  //
-  //  canvasRectangle.addEntityHandler(drawRectangleCommand);
-  //
-  //  verify(rectangleUtil, times(1)).draw(drawRectangleCommand, canvasRectangle.getCanvasArray());
-  //  verifyNoMoreInteractions(lineUtil, bucketFillUtil);
-  //}
 }

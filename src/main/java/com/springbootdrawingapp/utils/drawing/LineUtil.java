@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LineUtil {
-  public void draw(DrawLineCommand command, char[][] canvasArray) {
-    if (command.getX1() > canvasArray[0].length || command.getY1() > canvasArray.length) {
+  private final DrawLineCommand drawLineCommand;
+
+  public LineUtil(DrawLineCommand drawLineCommand) {
+    this.drawLineCommand = drawLineCommand;
+  }
+
+  public void draw(char[][] canvasArray) {
+    if (drawLineCommand.getX1() > canvasArray[0].length || drawLineCommand.getY1() > canvasArray.length) {
       throw new OutOfBoundsException(CommandError.OUT_OF_BOUNDS.toString());
     }
-    drawLine(command.getX1(), command.getY1(), command.getX2(),
-        command.getY2(), canvasArray);
+    drawLine(drawLineCommand.getX1(), drawLineCommand.getY1(), drawLineCommand.getX2(),
+        drawLineCommand.getY2(), canvasArray);
   }
 
   public void drawLine(int x1, int y1, int x2, int y2, char[][] canvasArray) {
-
     int height = Math.min(canvasArray.length, y2);
     int width = Math.min(canvasArray[0].length, x2);
 

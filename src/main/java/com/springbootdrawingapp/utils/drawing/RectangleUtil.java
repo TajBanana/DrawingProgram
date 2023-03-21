@@ -8,18 +8,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class RectangleUtil {
   private final LineUtil lineUtil;
+  private final DrawRectangleCommand drawRectangleCommand;
 
-  public RectangleUtil(LineUtil lineUtil) {
+  public RectangleUtil(LineUtil lineUtil,
+                       DrawRectangleCommand drawRectangleCommand) {
     this.lineUtil = lineUtil;
+    this.drawRectangleCommand = drawRectangleCommand;
   }
 
-  public void draw(DrawRectangleCommand command, char[][] canvasArray) {
-    if (command.getX1() > canvasArray[0].length || command.getY1() > canvasArray.length) {
+  public void draw(char[][] canvasArray) {
+    if (drawRectangleCommand.getX1() > canvasArray[0].length || drawRectangleCommand.getY1() > canvasArray.length) {
       throw new OutOfBoundsException(CommandError.OUT_OF_BOUNDS.toString());
     }
 
-    drawRectangle(command.getX1(), command.getY1(), command.getX2(),
-        command.getY2(), canvasArray);
+    drawRectangle(drawRectangleCommand.getX1(), drawRectangleCommand.getY1(), drawRectangleCommand.getX2(),
+        drawRectangleCommand.getY2(), canvasArray);
   }
 
   private void drawRectangle(int x1, int y1, int x2, int y2, char[][] canvasArray) {

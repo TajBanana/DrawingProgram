@@ -14,10 +14,10 @@ public class InputExecutor {
   }
 
   public void execute(Command command) {
-    if (command.getClass().equals(QuitCommand.class)) {
+    if (command instanceof QuitCommand) {
       ((QuitCommand) command).execute();
     }
-    else if (command.getClass().equals(CreateCanvasCommand.class)) {
+    else if (command instanceof CreateCanvasCommand) {
       canvasRectangle.construct();
     }
     else if (canvasRectangle.getCanvasArray() == null) {

@@ -27,7 +27,7 @@ public class LineUtilTest {
 
   @BeforeEach
   public void setup() {
-    lineUtil = new LineUtil();
+    lineUtil = new LineUtil(drawLineCommand);
     drawLineCommand = mock(DrawLineCommand.class);
     canvasArray = new char[10][10];
   }
@@ -41,24 +41,24 @@ public class LineUtilTest {
 
     lineUtil.drawLine(x1, y1, x2, y2, canvasArray);
 
-    for (int row = y1 - 1; row <= y2 - 1; row++) {
-      for (int column = x1 - 1; column <= x2 - 1; column++) {
-        assert(canvasArray[row][column] == CanvasChar.LINE.toChar());
+    for (int row = 0; row <= y2 - 1; row++) {
+      for (int column = 0; column <= x2 - 1; column++) {
+        assert (canvasArray[row][column] == CanvasChar.LINE.toChar());
       }
     }
   }
 
   @Test
   public void testDraw() {
-     DrawLineCommand command = new DrawLineCommand();
-     String[] params = new String[] {"1", "1", "5", "5"};
-     command.setParams(params);
+    DrawLineCommand command = new DrawLineCommand();
+    String[] params = new String[]{"1", "1", "5", "5"};
+    command.setParams(params);
 
-    lineUtil.draw(command, canvasArray);
+    lineUtil.draw(canvasArray);
 
     for (int row = 0; row <= 4; row++) {
       for (int column = 0; column <= 4; column++) {
-        assert(canvasArray[row][column] == CanvasChar.LINE.toChar());
+        assert (canvasArray[row][column] == CanvasChar.LINE.toChar());
       }
     }
   }
@@ -66,12 +66,12 @@ public class LineUtilTest {
   @Test
   public void testXDrawOutOfBounds() {
     when(drawLineCommand.getX1()).thenReturn(11);
-    assertThrows(OutOfBoundsException.class, () -> lineUtil.draw(drawLineCommand, canvasArray));
+    assertThrows(OutOfBoundsException.class, () -> lineUtil.draw(canvasArray));
   }
 
   @Test
   public void testYDrawOutOfBounds() {
     when(drawLineCommand.getY1()).thenReturn(11);
-    assertThrows(OutOfBoundsException.class, () -> lineUtil.draw(drawLineCommand, canvasArray));
+    assertThrows(OutOfBoundsException.class, () -> lineUtil.draw(canvasArray));
   }
 }
