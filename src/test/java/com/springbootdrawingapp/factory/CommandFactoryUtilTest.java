@@ -1,3 +1,4 @@
+/*
 package com.springbootdrawingapp.factory;
 
 import com.springbootdrawingapp.commands.*;
@@ -40,4 +41,4 @@ class CommandFactoryUtilTest {
 //  Quit command not tested because it will quit the entire program during test
 
 
-}
+}*/

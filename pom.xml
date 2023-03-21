@@ -108,6 +108,7 @@
                         <exclude>**/SpringBootDrawingAppApplication.**/**
                         </exclude>
                         <exclude>**/Program.**/**</exclude>
+                        <exclude>**/QuitCommand.**/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>

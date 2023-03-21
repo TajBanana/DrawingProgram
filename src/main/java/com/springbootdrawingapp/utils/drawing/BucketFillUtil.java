@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BucketFillUtil {
 
-  public void fill(DrawBucketFillCommand command, char[][] canvasArray) {
+  public void draw(DrawBucketFillCommand command, char[][] canvasArray) {
     if (command.getY1() > canvasArray[0].length || command.getX1() > canvasArray.length) {
       throw new OutOfBoundsException(CommandError.OUT_OF_BOUNDS.toString());
     }
@@ -25,19 +25,18 @@ public class BucketFillUtil {
 
   }
 
-  private void fillHelper(char[][] canvasArray, int sr, int sc,
+  private void fillHelper(char[][] canvasArray, int searchRow, int searchColumn,
                           int column, int row, char sourceChar, char fillChar) {
-// Condition for checking out of bounds
-    if (sr < 0 || sr >= column || sc < 0 || sc >= row)
+    if (searchRow < 0 || searchRow >= column || searchColumn < 0 || searchColumn >= row)
       return;
 
-    if (canvasArray[sr][sc] != sourceChar)
+    if (canvasArray[searchRow][searchColumn] != sourceChar)
       return;
 
-    canvasArray[sr][sc] = fillChar;
-    fillHelper(canvasArray, sr - 1, sc, column, row, sourceChar, fillChar); // left
-    fillHelper(canvasArray, sr + 1, sc, column, row, sourceChar, fillChar); // right
-    fillHelper(canvasArray, sr, sc + 1, column, row, sourceChar, fillChar); // top
-    fillHelper(canvasArray, sr, sc - 1, column, row, sourceChar, fillChar); // bottom
+    canvasArray[searchRow][searchColumn] = fillChar;
+    fillHelper(canvasArray, searchRow - 1, searchColumn, column, row, sourceChar, fillChar); // left
+    fillHelper(canvasArray, searchRow + 1, searchColumn, column, row, sourceChar, fillChar); // right
+    fillHelper(canvasArray, searchRow, searchColumn + 1, column, row, sourceChar, fillChar); // top
+    fillHelper(canvasArray, searchRow, searchColumn - 1, column, row, sourceChar, fillChar); // bottom
   }
 }

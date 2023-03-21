@@ -1,5 +1,6 @@
 package com.springbootdrawingapp.models;
 
+import com.springbootdrawingapp.commands.CreateCanvasCommand;
 import com.springbootdrawingapp.commands.DrawBucketFillCommand;
 import com.springbootdrawingapp.commands.DrawLineCommand;
 import com.springbootdrawingapp.commands.DrawRectangleCommand;
@@ -7,83 +8,135 @@ import com.springbootdrawingapp.utils.drawing.BucketFillUtil;
 import com.springbootdrawingapp.utils.drawing.LineUtil;
 import com.springbootdrawingapp.utils.drawing.RectangleUtil;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CanvasRectangleTest {
+class CanvasRectangleTest {
+
+  @Mock
+  private LineUtil lineUtil;
+  @Mock
+  private RectangleUtil rectangleUtil;
+  @Mock
+  private BucketFillUtil bucketFillUtil;
+  @Mock
+  private CreateCanvasCommand createCanvasCommand;
 
   @InjectMocks
   private CanvasRectangle canvasRectangle;
 
-  @Mock
-  private LineUtil lineUtil;
-
-  @Mock
-  private RectangleUtil rectangleUtil;
-
-  @Mock
-  private BucketFillUtil bucketFillUtil;
-
-  @BeforeEach
-  public void setUp() {
-    canvasRectangle = new CanvasRectangle(lineUtil, rectangleUtil, bucketFillUtil);
-    canvasRectangle.setWidth(10);
-    canvasRectangle.setHeight(5);
-    canvasRectangle.constructProperty();
-  }
-
   @Test
-  public void testConstructProperty() {
-    assertEquals(canvasRectangle.getWidth(), 10);
-    assertEquals(canvasRectangle.getHeight(), 5);
-    assertEquals(canvasRectangle.getCanvasArray().length, 5);
-    assertEquals(canvasRectangle.getCanvasArray()[0].length, 10);
-    assertEquals(canvasRectangle.getCanvasArray()[0][0], ' ');
+  void testConstruct() {
+    int width = 10;
+    int height = 5;
+    when(createCanvasCommand.getWidth()).thenReturn(width);
+    when(createCanvasCommand.getHeight()).thenReturn(height);
+    canvasRectangle.construct();
+    char[][] expectedCanvasArray = new char[height][width];
+    for (char[] row : expectedCanvasArray) {
+      Arrays.fill(row, ' ');
+    }
+    assertArrayEquals(expectedCanvasArray, canvasRectangle.getCanvasArray());
   }
 
-  @Test
-  public void testAddEntity() {
-    String[] drawLineParams = new String[]{"1", "2", "3", "2"};
-    DrawLineCommand drawLineCommand = new DrawLineCommand(drawLineParams);
-    doNothing().when(lineUtil).draw(drawLineCommand, canvasRectangle.getCanvasArray());
-    canvasRectangle.addEntity(drawLineCommand);
-    verify(lineUtil, times(1)).draw(drawLineCommand, canvasRectangle.getCanvasArray());
+  @Nested
+  class testWithCanvas {
 
+    @BeforeEach
+    void setUp() {
+      int width = 10;
+      int height = 10;
+      when(createCanvasCommand.getWidth()).thenReturn(width);
+      when(createCanvasCommand.getHeight()).thenReturn(height);
+      canvasRectangle.construct();
+    }
 
-    String[] drawRectangleParams = new String[]{"1", "5", "1", "5"};
-    DrawRectangleCommand drawRectangleCommand = new DrawRectangleCommand(drawRectangleParams);
-    canvasRectangle.addEntity(drawRectangleCommand);
-    verify(rectangleUtil, times(1)).draw(drawRectangleCommand, canvasRectangle.getCanvasArray());
+    @Test
+    void testAddLineEntity() {
+      DrawLineCommand drawLineCommand = mock(DrawLineCommand.class);
+      canvasRectangle.addEntity(drawLineCommand);
+      verify(lineUtil, times(1)).draw(drawLineCommand, canvasRectangle.getCanvasArray());
+    }
 
-    String[] drawBucketFillParams = new String[]{"1", "1", "o"};
-    DrawBucketFillCommand drawBucketFillCommand = new DrawBucketFillCommand(drawBucketFillParams);
-    canvasRectangle.addEntity(drawBucketFillCommand);
-    verify(bucketFillUtil, times(1)).fill(drawBucketFillCommand, canvasRectangle.getCanvasArray());
+    @Test
+    void testAddRectangleEntity() {
+      DrawRectangleCommand drawRectangleCommand = mock(DrawRectangleCommand.class);
+      canvasRectangle.addEntity(drawRectangleCommand);
+      verify(rectangleUtil, times(1)).draw(drawRectangleCommand,
+          canvasRectangle.getCanvasArray());
+    }
+
+    @Test
+    void testAddBucketFillEntity() {
+      DrawBucketFillCommand drawRectangleCommand = mock(DrawBucketFillCommand.class);
+      canvasRectangle.addEntity(drawRectangleCommand);
+      verify(bucketFillUtil, times(1)).draw(drawRectangleCommand,
+          canvasRectangle.getCanvasArray());
+    }
+
+    @Test
+    void testRender() {
+      ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+      System.setOut(new PrintStream(outContent));
+
+      canvasRectangle.render();
+
+      String output = outContent.toString().trim();
+
+      System.setOut(System.out);
+
+      String expectedOutput = """
+          ------------
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          |          |
+          ------------""";
+
+      assertEquals(expectedOutput, output);
+    }
   }
 
-  @Test
-  public void testSetWidth() {
-    canvasRectangle.setWidth(20);
-    assertEquals(canvasRectangle.getWidth(), 20);
-  }
 
-  @Test
-  public void testSetHeight() {
-    canvasRectangle.setHeight(10);
-    assertEquals(canvasRectangle.getHeight(), 10);
-  }
-
-  @Test
-  public void testSetCanvasArray() {
-    char[][] newCanvasArray = new char[][] {{'a', 'b'}, {'c', 'd'}};
-    canvasRectangle.setCanvasArray(newCanvasArray);
-    assertEquals(canvasRectangle.getCanvasArray(), newCanvasArray);
-  }
+  //@Test
+  //void addEntityHandler_shouldCallDrawMethodFromLineUtil() {
+  //
+  //  DrawLineCommand drawLineCommand = new DrawLineCommand(1, 2, 6, 2);
+  //
+  //  canvasRectangle.addEntityHandler(drawLineCommand);
+  //
+  //  verify(lineUtil, times(1)).draw(drawLineCommand, canvasRectangle.getCanvasArray());
+  //  verifyNoMoreInteractions(rectangleUtil, bucketFillUtil);
+  //}
+  //
+  //@Test
+  //void addEntityHandler_shouldCallDrawMethodFromRectangleUtil() {
+  //  CanvasRectangle canvasRectangle = new CanvasRectangle(lineUtil, rectangleUtil,
+  //      bucketFillUtil, createCanvasCommand);
+  //  DrawRectangleCommand drawRectangleCommand = new DrawRectangleCommand(16, 1, 20, 3);
+  //
+  //  canvasRectangle.addEntityHandler(drawRectangleCommand);
+  //
+  //  verify(rectangleUtil, times(1)).draw(drawRectangleCommand, canvasRectangle.getCanvasArray());
+  //  verifyNoMoreInteractions(lineUtil, bucketFillUtil);
+  //}
 }

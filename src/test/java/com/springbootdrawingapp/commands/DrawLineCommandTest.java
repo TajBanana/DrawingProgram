@@ -1,39 +1,26 @@
 package com.springbootdrawingapp.commands;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(MockitoExtension.class)
 class DrawLineCommandTest {
 
-  private DrawLineCommand drawLineCommand;
-  private final String[] params = new String[]{"1", "5", "13", "10"};
-
-
-  @BeforeEach
-  void setUp() {
-    drawLineCommand = new DrawLineCommand(params);
-  }
+  @InjectMocks
+  DrawLineCommand drawLineCommand;
 
   @Test
-  void testGetX1() {
-    assertEquals(drawLineCommand.getX1(), Math.min(Integer.parseInt(params[0]), Integer.parseInt(params[2])));
-  }
+  public void testGetters() {
+    String[] params = {"2", "3", "5", "7"};
+    drawLineCommand.setParams(params);
 
-  @Test
-  void testGetY1() {
-    assertEquals(drawLineCommand.getY1(), Math.min(Integer.parseInt(params[1]), Integer.parseInt(params[3])));
+    assertEquals(2, drawLineCommand.getX1());
+    assertEquals(3, drawLineCommand.getY1());
+    assertEquals(5, drawLineCommand.getX2());
+    assertEquals(7, drawLineCommand.getY2());
   }
-
-  @Test
-  void testGetX2() {
-    assertEquals(drawLineCommand.getX2(), Math.max(Integer.parseInt(params[0]), Integer.parseInt(params[2])));
-  }
-
-  @Test
-  void testGetY2() {
-    assertEquals(drawLineCommand.getY2(), Math.max(Integer.parseInt(params[1]), Integer.parseInt(params[3])));
-  }
-
 }

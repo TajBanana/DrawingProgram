@@ -50,10 +50,6 @@ public class CanvasRectangle implements Canvas {
     render();
   }
 
-  public void render() {
-    System.out.println(CanvasFactory.rectangle(width, height, canvasArray));
-  }
-
   public void addEntityHandler(DrawCommand drawCommand) {
     if (drawCommand instanceof DrawLineCommand) {
       lineUtil.draw((DrawLineCommand) drawCommand, canvasArray);
@@ -62,8 +58,12 @@ public class CanvasRectangle implements Canvas {
       rectangleUtil.draw((DrawRectangleCommand) drawCommand, canvasArray);
     }
     else if (drawCommand instanceof DrawBucketFillCommand) {
-      bucketFillUtil.fill((DrawBucketFillCommand) drawCommand, canvasArray);
+      bucketFillUtil.draw((DrawBucketFillCommand) drawCommand, canvasArray);
 
     }
+  }
+
+  public void render() {
+    System.out.println(CanvasFactory.rectangle(width, height, canvasArray));
   }
 }

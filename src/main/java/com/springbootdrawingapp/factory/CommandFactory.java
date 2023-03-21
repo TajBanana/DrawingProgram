@@ -2,11 +2,9 @@ package com.springbootdrawingapp.factory;
 
 import com.springbootdrawingapp.commands.*;
 import com.springbootdrawingapp.exceptions.InvalidCommandException;
-import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 @Service
-@Getter
 public class CommandFactory {
   private final CreateCanvasCommand createCanvasCommand;
   private final DrawLineCommand drawLineCommand;

@@ -1,50 +1,69 @@
 package com.springbootdrawingapp.factory;
 
-import com.springbootdrawingapp.commands.Command;
-import com.springbootdrawingapp.commands.CreateCanvasCommand;
-import com.springbootdrawingapp.enums.Commands;
-import com.springbootdrawingapp.mapper.CommandsMapper;
-import com.springbootdrawingapp.utils.validator.CommandValidator;
-import com.springbootdrawingapp.utils.validator.ParamsValidator;
+import com.springbootdrawingapp.commands.*;
+import com.springbootdrawingapp.exceptions.InvalidCommandException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CommandFactoryTest {
-
   @Mock
-  private CommandValidator commandValidator;
+  private CreateCanvasCommand createCanvasCommand;
   @Mock
-  private ParamsValidator paramsValidator;
+  private DrawLineCommand drawLineCommand;
   @Mock
-  private CommandsMapper commandsMapper;
+  private DrawRectangleCommand drawRectangleCommand;
   @Mock
-  private CommandFactoryUtil commandFactoryUtil;
+  private DrawBucketFillCommand drawBucketFillCommand;
+  @Mock
+  private QuitCommand quitCommand;
 
   @InjectMocks
   private CommandFactory commandFactory;
 
   @Test
-  void testGetCommand() {
-    String userInput = "c 1 10";
-    String[] inputArray = userInput.split("\\s+");
-    String commandString = inputArray[0];
-    String[] params = {"1", "10"};
-
-    doNothing().when(commandValidator).validate(commandString);
-    doNothing().when(paramsValidator).validate(commandString, params);
-    when(commandsMapper.stringToCommands(commandString)).thenReturn(Commands.CREATE_CANVAS);
-
-    CreateCanvasCommand expectedCommand = new CreateCanvasCommand(new String[]{"1", "10"});
-    when(commandFactoryUtil.resolve(Commands.CREATE_CANVAS, params)).thenReturn(expectedCommand);
-    Command actualCommand = commandFactory.getCommand(userInput);
-    assertEquals(actualCommand, expectedCommand);
+  void testGetCommandCreateCanvas() {
+    Command command = commandFactory.getCommand("C");
+    assertTrue(command instanceof CreateCanvasCommand);
+    assertEquals(createCanvasCommand, command);
   }
+
+  @Test
+  void testGetCommandDrawLine() {
+    Command command = commandFactory.getCommand("L");
+    assertTrue(command instanceof DrawLineCommand);
+    assertEquals(drawLineCommand, command);
+  }
+
+  @Test
+  void testGetCommandDrawRectangle() {
+    Command command = commandFactory.getCommand("R");
+    assertTrue(command instanceof DrawRectangleCommand);
+    assertEquals(drawRectangleCommand, command);
+  }
+
+  @Test
+  void testGetCommandDrawBucketFill() {
+    Command command = commandFactory.getCommand("B");
+    assertTrue(command instanceof DrawBucketFillCommand);
+    assertEquals(drawBucketFillCommand, command);
+  }
+
+  @Test
+  void testGetCommandQuit() {
+    Command command = commandFactory.getCommand("Q");
+    assertTrue(command instanceof QuitCommand);
+    assertEquals(quitCommand, command);
+  }
+
+  @Test
+  void testGetCommandInvalidCommand() {
+    assertThrows(InvalidCommandException.class, () -> commandFactory.getCommand("Z"));
+  }
+
 }

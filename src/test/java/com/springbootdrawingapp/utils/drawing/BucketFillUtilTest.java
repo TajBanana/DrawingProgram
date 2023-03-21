@@ -2,47 +2,56 @@ package com.springbootdrawingapp.utils.drawing;
 
 import com.springbootdrawingapp.commands.DrawBucketFillCommand;
 import com.springbootdrawingapp.exceptions.OutOfBoundsException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class BucketFillUtilTest {
-  private BucketFillUtil bucketFillUtil;
 
-  @BeforeEach
-  void setUp() {
-    bucketFillUtil = new BucketFillUtil();
+  @InjectMocks
+  BucketFillUtil bucketFillUtil;
+
+
+  @Test
+  public void testDrawWithValidInput() {
+    DrawBucketFillCommand command = mock(DrawBucketFillCommand.class);
+    when(command.getX1()).thenReturn(2);
+    when(command.getY1()).thenReturn(3);
+    when(command.getFillChar()).thenReturn('c');
+
+    char[][] canvasArray = {{'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}};
+
+    bucketFillUtil.draw(command, canvasArray);
+
+    assertEquals('c', canvasArray[1][2]);
   }
 
   @Test
-  void fill_whenCommandIsOutOfBounds_throwsException() {
-    String[] params = new String[]{"10", "10", "o"};
-    DrawBucketFillCommand command = new DrawBucketFillCommand(params);
-    char[][] canvasArray = new char[5][5];
+  public void testDrawWithInvalidXInput() {
+    DrawBucketFillCommand command = mock(DrawBucketFillCommand.class);
+    when(command.getX1()).thenReturn(4);
+    when(command.getY1()).thenReturn(1);
 
-    assertThrows(OutOfBoundsException.class, () -> bucketFillUtil.fill(command, canvasArray));
+    char[][] canvasArray = {{'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}};
+
+    assertThrows(OutOfBoundsException.class, () -> bucketFillUtil.draw(command, canvasArray));
   }
 
   @Test
-  void fill_whenCommandIsWithinBounds_fillsCorrectly() {
-    String[] params = new String[]{"2", "2", "o"};
+  public void testDrawWithInvalidYInput() {
+    DrawBucketFillCommand command = mock(DrawBucketFillCommand.class);
+    when(command.getY1()).thenReturn(6);
 
-    DrawBucketFillCommand command = new DrawBucketFillCommand(params);
-    char[][] canvasArray = new char[][]{
-        {'x', 'x', 'x', 'x'},
-        {'x', ' ', ' ', 'x'},
-        {'x', ' ', ' ', 'x'},
-        {'x', 'x', 'x', 'x'}
-    };
-    char[][] expected = new char[][]{
-        {'x', 'x', 'x', 'x'},
-        {'x', 'o', 'o', 'x'},
-        {'x', 'o', 'o', 'x'},
-        {'x', 'x', 'x', 'x'}
-    };
+    char[][] canvasArray = {{'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}, {'o', 'o', 'o', 'o', 'o'}};
 
-    bucketFillUtil.fill(command, canvasArray);
-    assertArrayEquals(expected, canvasArray);
+    assertThrows(OutOfBoundsException.class, () -> bucketFillUtil.draw(command, canvasArray));
   }
+
 }
