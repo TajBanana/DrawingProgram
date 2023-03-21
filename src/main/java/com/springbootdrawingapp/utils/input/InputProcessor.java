@@ -25,8 +25,7 @@ public class InputProcessor {
 
     String[] inputArray = inputString.split("\\s+");
     String commandString = inputArray[0];
-    String[] params = Arrays.copyOfRange(inputArray, 1,
-        inputArray.length);
+    String[] params = Arrays.copyOfRange(inputArray, 1, inputArray.length);
 
     try {
       Command command = commandFactory.getCommand(commandString);

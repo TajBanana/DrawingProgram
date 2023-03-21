@@ -49,13 +49,13 @@ public class CanvasRectangle implements Canvas {
 
   public void addEntityHandler(DrawCommand drawCommand) {
     if (drawCommand instanceof DrawLineCommand) {
-      lineUtil.draw((DrawLineCommand) drawCommand, canvasArray);
+      lineUtil.draw(canvasArray);
     }
     else if (drawCommand instanceof DrawRectangleCommand) {
-      rectangleUtil.draw((DrawRectangleCommand) drawCommand, canvasArray);
+      rectangleUtil.draw(canvasArray);
     }
     else if (drawCommand instanceof DrawBucketFillCommand) {
-      bucketFillUtil.draw((DrawBucketFillCommand) drawCommand, canvasArray);
+      bucketFillUtil.draw(canvasArray);
 
     }
   }

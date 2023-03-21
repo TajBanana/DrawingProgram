@@ -29,7 +29,7 @@ public class RectangleUtilTest {
     drawRectangleCommand.setParams(params);
 
     assertThrows(OutOfBoundsException.class,
-        () -> rectangleUtil.draw(drawRectangleCommand, canvasArray));
+        () -> rectangleUtil.draw(canvasArray));
   }
 
   @Test
@@ -40,7 +40,7 @@ public class RectangleUtilTest {
     drawRectangleCommand.setParams(params);
 
     assertThrows(OutOfBoundsException.class,
-        () -> rectangleUtil.draw(drawRectangleCommand, canvasArray));
+        () -> rectangleUtil.draw(canvasArray));
   }
 
 
@@ -53,7 +53,7 @@ public class RectangleUtilTest {
     when(drawRectangleCommand.getX2()).thenReturn(3);
     when(drawRectangleCommand.getY2()).thenReturn(4);
 
-    rectangleUtil.draw(drawRectangleCommand, canvasArray);
+    rectangleUtil.draw(canvasArray);
 
     verify(lineUtil, times(1)).drawLine(1, 2, 3, 2, canvasArray);
     verify(lineUtil, times(1)).drawLine(1, 2, 1, 4, canvasArray);
