@@ -1,20 +1,18 @@
 package com.springbootdrawingapp;
 
 import com.springbootdrawingapp.commands.Command;
-import com.springbootdrawingapp.exceptions.EmptyCanvasException;
+import com.springbootdrawingapp.exceptions.InvalidCanvasParamException;
+import com.springbootdrawingapp.exceptions.InvalidCommandException;
 import com.springbootdrawingapp.factory.CommandFactory;
 import com.springbootdrawingapp.utils.input.InputExecutor;
 import com.springbootdrawingapp.utils.input.InputProcessor;
+import com.springbootdrawingapp.utils.validator.ParamsValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,38 +20,57 @@ public class InputProcessorTest {
 
   @Mock
   private CommandFactory commandFactory;
-
   @Mock
   private InputExecutor inputExecutor;
+  @Mock
+  private ParamsValidator paramsValidator;
 
   @InjectMocks
   private InputProcessor inputProcessor;
 
   @Test
-  public void process_withNoCanvas_shouldThrowException() {
-    final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outContent));
+  void testProcessValidInput() {
+    String inputString = "C 20 4";
+    String commandString = "C";
+    String[] params = {"20", "4"};
+    Command command = mock(Command.class);
 
-    String inputString = "b 1 10";
-    when(commandFactory.getCommand(inputString)).thenThrow(new EmptyCanvasException());
+    when(commandFactory.getCommand(commandString)).thenReturn(command);
+    doNothing().when(paramsValidator).validate(commandString, params);
+
     inputProcessor.process(inputString);
 
-    assertEquals("""
-
-        \u001B[31mPlease create a canvas first!!!\u001B[0m
-        
-        """, outContent.toString());
+    verify(command).setParams(params);
+    verify(inputExecutor).execute(command);
   }
 
   @Test
-  public void process_withValidInput_shouldExecuteCommand() {
-    String inputString = "valid input";
-    Command command = mock(Command.class);
-    when(commandFactory.getCommand(inputString)).thenReturn(command);
+  void testProcessInvalidCommand() {
+    String inputString = "Z";
+    String commandString = "Z";
+
+    when(commandFactory.getCommand(commandString)).thenThrow(InvalidCommandException.class);
 
     inputProcessor.process(inputString);
 
-    verify(inputExecutor).execute(command);
+    verifyNoInteractions(paramsValidator, inputExecutor);
+  }
+
+  @Test
+  void testProcessInvalidParams() {
+    String inputString = "C 20 A";
+    String commandString = "C";
+    String[] params = {"20", "A"};
+    Command command = mock(Command.class);
+
+    when(commandFactory.getCommand(commandString)).thenReturn(command);
+    doThrow(InvalidCanvasParamException.class).when(paramsValidator)
+                                              .validate(commandString,
+                                                  params);
+
+    inputProcessor.process(inputString);
+
+    verifyNoInteractions(inputExecutor);
   }
 
 }

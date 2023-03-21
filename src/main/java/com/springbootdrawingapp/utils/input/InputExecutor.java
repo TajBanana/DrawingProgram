@@ -14,25 +14,18 @@ public class InputExecutor {
   }
 
   public void execute(Command command) {
-
-    if (command.getClass().equals(CreateCanvasCommand.class)) {
-      int width = ((CreateCanvasCommand) command).getWidth();
-      int height = ((CreateCanvasCommand) command).getHeight();
-      canvasRectangle.setHeight(height);
-      canvasRectangle.setWidth(width);
-      canvasRectangle.constructProperty();
+    if (command.getClass().equals(QuitCommand.class)) {
+      ((QuitCommand) command).execute();
+    }
+    else if (command.getClass().equals(CreateCanvasCommand.class)) {
+      canvasRectangle.construct();
     }
     else if (canvasRectangle.getCanvasArray() == null) {
       throw new EmptyCanvasException();
     }
-    else if (command.getClass().equals(DrawLineCommand.class)) {
-      canvasRectangle.addEntity((DrawLineCommand) command);
+    else if (command instanceof DrawCommand) {
+      canvasRectangle.addEntity((DrawCommand) command);
     }
-    else if (command.getClass().equals(DrawRectangleCommand.class)) {
-      canvasRectangle.addEntity((DrawRectangleCommand) command);
-    }
-    else if (command.getClass().equals(DrawBucketFillCommand.class)) {
-      canvasRectangle.addEntity((DrawBucketFillCommand) command);
-    }
+
   }
 }
