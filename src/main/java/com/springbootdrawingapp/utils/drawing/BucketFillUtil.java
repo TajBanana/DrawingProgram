@@ -5,8 +5,6 @@ import com.springbootdrawingapp.enums.CommandError;
 import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
 @Service
 public class BucketFillUtil {
 
@@ -14,8 +12,6 @@ public class BucketFillUtil {
     if (command.getY1() > canvasArray[0].length || command.getX1() > canvasArray.length) {
       throw new OutOfBoundsException(CommandError.OUT_OF_BOUNDS.toString());
     }
-
-    System.out.println(Arrays.deepToString(canvasArray));
 
     int x = command.getX1() - 1;
     int y = command.getY1() - 1;
