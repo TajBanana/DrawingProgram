@@ -14,11 +14,8 @@ import java.util.Arrays;
 public class CanvasRectangle implements Canvas {
 
   private final LineUtil lineUtil;
-
   private final RectangleUtil rectangleUtil;
-
   private final BucketFillUtil bucketFillUtil;
-
   private final CreateCanvasCommand createCanvasCommand;
 
   @Getter

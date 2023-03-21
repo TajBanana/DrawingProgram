@@ -11,7 +11,10 @@ public class ParamsValidator {
   private final DrawRectangleParamsValidator drawRectangleValidator;
   private final DrawBucketFillParamsValidator drawBucketFillParamsValidator;
 
-  public ParamsValidator(CreateCanvasParamsValidator createCanvasParamsValidator, DrawLineParamsValidator drawLineParamsValidator, DrawRectangleParamsValidator drawRectangleValidator, DrawBucketFillParamsValidator drawBucketFillParamsValidator) {
+  public ParamsValidator(CreateCanvasParamsValidator createCanvasParamsValidator,
+                         DrawLineParamsValidator drawLineParamsValidator,
+                         DrawRectangleParamsValidator drawRectangleValidator,
+                         DrawBucketFillParamsValidator drawBucketFillParamsValidator) {
     this.createCanvasParamsValidator = createCanvasParamsValidator;
     this.drawLineParamsValidator = drawLineParamsValidator;
     this.drawRectangleValidator = drawRectangleValidator;
@@ -19,17 +22,17 @@ public class ParamsValidator {
   }
 
   public void validate(String command, String[] params) {
-      if (command.equalsIgnoreCase(Commands.CREATE_CANVAS.inputString())) {
-        createCanvasParamsValidator.validate(params);
-      }
-      if (command.equalsIgnoreCase(Commands.NEW_LINE.inputString())) {
-        drawLineParamsValidator.validate(params);
-      }
-      if (command.equalsIgnoreCase(Commands.NEW_RECTANGLE.inputString())) {
-        drawRectangleValidator.validate(params);
-      }
-      if (command.equalsIgnoreCase(Commands.FILL_AREA.inputString())) {
-        drawBucketFillParamsValidator.validate(params);
-      }
+    if (command.equalsIgnoreCase(Commands.CREATE_CANVAS.inputString())) {
+      createCanvasParamsValidator.validate(params);
+    }
+    if (command.equalsIgnoreCase(Commands.NEW_LINE.inputString())) {
+      drawLineParamsValidator.validate(params);
+    }
+    if (command.equalsIgnoreCase(Commands.NEW_RECTANGLE.inputString())) {
+      drawRectangleValidator.validate(params);
+    }
+    if (command.equalsIgnoreCase(Commands.FILL_AREA.inputString())) {
+      drawBucketFillParamsValidator.validate(params);
+    }
   }
 }
