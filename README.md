@@ -9,18 +9,13 @@ To run the program:
 
 # Design
 The program is written using Spring for better dependency management and 
-better testability. As some Spring Beans require updates to their 
-properties during run time, the `private final Bean bean` constructor 
-injection has its limitations. Therefore, you will see that there will be 
-instances where I removed the dependency management from Spring and created 
-`new Objects()`.
+testability. The dependencies are managed by spring thus improving 
+testability of the code.
 
-This reduces the testability and isn't recommended. However, this shall be 
-the implementation until I can come up with a better solution.
 
 ### Dependencies
 The dependencies are listed from top to bottom 
-- SpringApp > Program > InputProcessor > Command > Canvas 
+- SpringApp > Program > InputProcessor > InputExcecutor > Command > Canvas
 
 There are a list of helper/util classes that include:
 1. validators
