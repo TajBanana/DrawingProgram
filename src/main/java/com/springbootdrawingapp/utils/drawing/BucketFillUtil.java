@@ -5,6 +5,8 @@ import com.springbootdrawingapp.enums.CommandError;
 import com.springbootdrawingapp.exceptions.OutOfBoundsException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class BucketFillUtil {
 
@@ -13,30 +15,31 @@ public class BucketFillUtil {
       throw new OutOfBoundsException(CommandError.OUT_OF_BOUNDS.toString());
     }
 
-    int xIndex = command.getX1() - 1;
-    int yIndex = command.getY1() - 1;
+    System.out.println(Arrays.deepToString(canvasArray));
+
+    int x = command.getX1() - 1;
+    int y = command.getY1() - 1;
     char fillChar = command.getFillChar();
-    char sourceChar = canvasArray[xIndex][yIndex];
+    char sourceChar = canvasArray[y][x];
 
     int height = canvasArray.length;
-    int row = canvasArray[0].length;
+    int width = canvasArray[0].length;
 
-    fillHelper(canvasArray, xIndex, yIndex, height, row, sourceChar, fillChar);
+    fillHelper(canvasArray, x, y, width, height, sourceChar, fillChar);
 
   }
 
-  private void fillHelper(char[][] canvasArray, int searchRow, int searchColumn,
-                          int column, int row, char sourceChar, char fillChar) {
-    if (searchRow < 0 || searchRow >= column || searchColumn < 0 || searchColumn >= row)
+  void fillHelper(char[][] screen, int x, int y, int width, int height, char prevC, char newC) {
+    if (x < 0 || x >= width || y < 0 || y >= height)
+      return;
+    if (screen[y][x] != prevC)
       return;
 
-    if (canvasArray[searchRow][searchColumn] != sourceChar)
-      return;
+    screen[y][x] = newC;
 
-    canvasArray[searchRow][searchColumn] = fillChar;
-    fillHelper(canvasArray, searchRow - 1, searchColumn, column, row, sourceChar, fillChar); // left
-    fillHelper(canvasArray, searchRow + 1, searchColumn, column, row, sourceChar, fillChar); // right
-    fillHelper(canvasArray, searchRow, searchColumn + 1, column, row, sourceChar, fillChar); // top
-    fillHelper(canvasArray, searchRow, searchColumn - 1, column, row, sourceChar, fillChar); // bottom
+    fillHelper(screen, x + 1, y, width, height, prevC, newC);
+    fillHelper(screen, x - 1, y, width, height, prevC, newC);
+    fillHelper(screen, x, y + 1, width, height, prevC, newC);
+    fillHelper(screen, x, y - 1, width, height, prevC, newC);
   }
 }
